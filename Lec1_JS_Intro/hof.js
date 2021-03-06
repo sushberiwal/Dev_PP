@@ -2,10 +2,12 @@
 // Callback Functions => Functions which are passed into a function as a argument !
 
 function getFirstName(fullName){
-    // fullName = "TONY STARK".split(" ") => [ "TONY" , "STARK"  ];
+    // fullName = "TONY STARK".split("") => [ "TONY" , "STARK"  ];
     fullName = fullName.split(" ");
     return fullName[0];
 }
+
+
 
 function getLastName(fullName){
     fullName = fullName.split(" ");
