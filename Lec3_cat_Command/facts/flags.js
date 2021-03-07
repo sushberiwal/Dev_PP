@@ -26,8 +26,8 @@ console.log(joinedString);
 
 
 // -b => add line numbers 
-let count = 1;
 function addLineNumberToNonEmptyLines(data){
+    let count = 1;
     for(let i=0 ; i<data.length ;i++){
         if(data[i] != ''){
             data[i] = `${count}. ${data[i]}`;
