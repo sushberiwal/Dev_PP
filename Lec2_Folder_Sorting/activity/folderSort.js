@@ -21,7 +21,6 @@ function checkFolder(extension , folderPath) {
   // "./Downloads/Images"
   return fs.existsSync(extFolderPath);
 }
-
 function moveFile(fileName , folderPath) {
   // copy file
   let sourceFilePath = `${folderPath}/${fileName}`; // "./Downloads/abc.txt"
@@ -31,11 +30,9 @@ function moveFile(fileName , folderPath) {
   // delete file
   fs.unlinkSync(sourceFilePath);
 }
-
 function createFolder() {
   fs.mkdirSync(extFolderPath);
 }
-
 function sortFolder(folderPath) {
   // get content of folderPath
   let content = fs.readdirSync(folderPath);
