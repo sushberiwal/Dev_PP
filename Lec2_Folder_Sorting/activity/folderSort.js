@@ -4,13 +4,15 @@ let extensions = require("./util");
 let folderPath = "./Downloads";
 let extFolderPath;
 
-function checkFolder(extension) {
+function checkFolder(extension , folderPath) {
+  // .mp3
+  // folderPath ( "./Downloads/Audio" )
   // check if extension is matching with any folderName
-  // .jpg
+  // .jpg => Images
   // "./Downloads"
   for (let key in extensions) {
     // "Images" \\ "Audio" ......
-    if (extensions[key].includes(extension)) {
+    if ( extensions[key].includes(extension)) {
       // string interpolation
       extFolderPath = `${folderPath}/${key}`;
       break;
@@ -20,7 +22,7 @@ function checkFolder(extension) {
   return fs.existsSync(extFolderPath);
 }
 
-function moveFile(fileName) {
+function moveFile(fileName , folderPath) {
   // copy file
   let sourceFilePath = `${folderPath}/${fileName}`; // "./Downloads/abc.txt"
   let destinationFilePath = `${extFolderPath}/${fileName}`; // "./Downloads/Documents/abc.txt"
@@ -38,15 +40,23 @@ function sortFolder(folderPath) {
   // get content of folderPath
   let content = fs.readdirSync(folderPath);
   for (let i = 0; i < content.length; i++) {
-    // get extension of each file
-    let extensionName = path.extname(content[i]);
-    console.log(extensionName);
-    let extensionFolderExist = checkFolder(extensionName);
-    if (extensionFolderExist) {
-      moveFile(content[i]);
-    } else {
-      createFolder();
-      moveFile(content[i]);
+    
+    // get extension of each file "./Downloads/Misc"
+    let isDirectory = fs.lstatSync(`${folderPath}/${content[i]}`).isDirectory();
+    if(isDirectory){
+      console.log("It is a folder");
+      sortFolder(`${folderPath}/${content[i]}`); "./Downloads/Audio"
+    }
+    else{
+      let extensionName = path.extname(content[i]);
+      console.log(extensionName);
+      let extensionFolderExist = checkFolder(extensionName , folderPath);
+      if (extensionFolderExist) {
+        moveFile(content[i] , folderPath);
+      } else {
+        createFolder();
+        moveFile(content[i] , folderPath);
+      }
     }
   }
 }
