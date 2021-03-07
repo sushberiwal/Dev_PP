@@ -29,8 +29,23 @@ for (let i = 0; i < files.length; i++) {
 
 // console.log(fileKaData);
 
+if(!flags.length){
+  console.log(fileKaData);
+  return;
+}
+
+
+
 let data = fileKaData.split("\r\n");
+
+
 let removedSpaces = [];
+
+// node wCat.js -s -b -n f1.txt
+// node wCat.js -s -n f1.txt
+
+// flags = ["-s" , "-b" , "-n"];
+// files = ["f1.txt"];
 
 if (flags.includes("-s")) {
   removeLargeSpaces(data);
