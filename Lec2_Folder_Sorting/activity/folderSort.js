@@ -33,16 +33,34 @@ function moveFile(fileName , folderPath) {
 function createFolder() {
   fs.mkdirSync(extFolderPath);
 }
+
+function checkIfAlreadyInSortedFolder(folderPath , content){
+  //folderPath =  "/Downloads/Audio"
+  //content =  cb.mp3
+  let folderComponents = folderPath.split("/");
+  let folderName = folderComponents[folderComponents.length-1];
+  if(extensions.hasOwnProperty(folderName)){
+    return true;
+  }
+  return false;
+}
+
 function sortFolder(folderPath) {
   // get content of folderPath
   let content = fs.readdirSync(folderPath);
   for (let i = 0; i < content.length; i++) {
     
+    let isAlreadyInCheckedFolder = checkIfAlreadyInSortedFolder(folderPath);
+    if(isAlreadyInCheckedFolder){
+      console.log("Already In Sorted FOlder !!");
+      return;
+    }
+
     // get extension of each file "./Downloads/Misc"
     let isDirectory = fs.lstatSync(`${folderPath}/${content[i]}`).isDirectory();
     if(isDirectory){
       console.log("It is a folder");
-      sortFolder(`${folderPath}/${content[i]}`); "./Downloads/Audio"
+      sortFolder(`${folderPath}/${content[i]}`); //"./Downloads/Audio"
     }
     else{
       let extensionName = path.extname(content[i]);
