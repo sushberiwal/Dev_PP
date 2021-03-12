@@ -1,0 +1,25 @@
+{
+  "name": "Dev_PP",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sushberiwal/Dev_PP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sushberiwal/Dev_PP/issues"
+  },
+  "homepage": "https://github.com/sushberiwal/Dev_PP#readme"
+}
