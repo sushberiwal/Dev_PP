@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* it will apply styles to all p tags */
+        /* p{
+            color:blue;
+        } */
+
+        /* ul p{
+            color:blue;
+        } */
+
+        /* descendent */
+        /* ul>p{
+            color:red;
+        } */
+
+        /* class based selector */
+        /* .inner{
+            color:blue;
+        } */
+
+        /* .inner.main{
+            color:red;
+        }*/
+
+        /* .main{
+            color: chartreuse;    
+        } */
+
+        /* .secondary-ul p{
+            
+        } */
+        /* .secondary-ul li p{
+            color:darkorchid
+        }*/
+
+        #main{
+            font-size: 100px;
+        }
+        .main{
+
+        }
+        
+        /* user defined  */
+        [colid="2"]{
+            color : lightgreen
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="abcd" rowid = "1" colid="1" >I am a Div 1</div>
+    <div class="abcd" rowid = "1" colid="2" >I am a Div 2</div>
+
+
+    <!-- id => unique in a page -->
+    <h1 id="main" class="heading">Heading 1</h1>
+    <h1 class="heading">Heading 2</h1>
+    <h1 class="heading">Heading 3</h1>
+    <h1 class="heading">Heading 4</h1>
+    <h1 class="heading">Heading 5</h1>
+
+   <ul class="list main-ul">
+       <li>
+           <p class="inner main">Hii i am a main p tag</p>
+       </li>
+   </ul>
+
+    <ul class="list secondary-ul">
+        <li><a href="https://www.google.com">Google</a></li>
+        <li>
+            <p class="inner">I am a p tag inside ul</p>
+        </li>
+    </ul>
+</body>
+</html>
