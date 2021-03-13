@@ -19,7 +19,6 @@ function parseData(html){
     let highestWicketsSoFar = 0;
     let nameOfHighestWicketTaker;
     let economy;
-
     let ch= cheerio.load(html);
     let bothBowlingTables = ch('.Collapsible .table.bowler');
     // {  '0' :{} , '1' :{}  }
