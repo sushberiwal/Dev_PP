@@ -39,12 +39,80 @@ function parseData(html){
                 let fours = ch(allTds['5']).text().trim();
                 let sixes = ch(allTds['6']).text().trim();
                 let strikeRate = ch(allTds['7']).text().trim();
-                console.log(`Name : ${batsmanName} Runs : ${runs} Balls : ${balls} Fours : ${fours} Sixes : ${sixes} StrikeRate : ${strikeRate}`)
+                // console.log(`Name : ${batsmanName} Runs : ${runs} Balls : ${balls} Fours : ${fours} Sixes : ${sixes} StrikeRate : ${strikeRate}`)
+                processBatsman(teamName , batsmanName , runs , balls , fours , sixes , strikeRate);
             }
         }
         console.log("##########################################");
     }
 
+}
+
+
+function checkTeamFolder(teamName){
+    let teamPath = `./IPL/${teamName}`;
+    return fs.existsSync(teamPath);
+}
+
+function checkBatsmanFile(teamName , batsmanName){
+    // "./IPL/Mumbai Indians/Rohit Sharma.json";
+    let batsmanPath = `./IPL/${teamName}/${batsmanName}.json`;
+    return fs.existsSync(batsmanPath);
+}
+
+function updateBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes , strikeRate){
+    let batsmanPath = `./IPL/${teamName}/${batsmanName}.json`;
+    let stringifiedData = fs.readFileSync(batsmanPath);
+    let batsmanFile = JSON.parse(stringifiedData);
+    let inning = {
+        Runs : runs , 
+        Balls : balls , 
+        Fours : fours , 
+        Sixes : sixes , 
+        StrikeRate : strikeRate
+    }
+    batsmanFile.push(inning);
+    fs.writeFileSync(batsmanPath , JSON.stringify(batsmanFile));
+}
+
+function createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes , strikeRate){
+    // "./IPL/Mumbai Indians/Rohit Sharma.json"
+    let batsmanPath = `./IPL/${teamName}/${batsmanName}.json`;
+    let batsmanFile = [];
+    let inning = {
+        Runs : runs , 
+        Balls : balls , 
+        Fours : fours , 
+        Sixes : sixes , 
+        StrikeRate : strikeRate
+    }
+    batsmanFile.push(inning);
+    let stringifiedData = JSON.stringify(batsmanFile); // [object] => [ {}]
+    fs.writeFileSync(batsmanPath , stringifiedData  );
+}
+function createTeamFolder(teamName){
+    let teamPath = `./IPL/${teamName}`;
+    fs.mkdirSync(teamPath);
+}
+
+
+
+
+function processBatsman(teamName , batsmanName , runs , balls , fours , sixes , strikeRate){
+    let isTeam = checkTeamFolder(teamName);
+    if(isTeam){
+        let isBatsman = checkBatsmanFile(teamName , batsmanName);
+        if(isBatsman){
+            updateBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes , strikeRate);
+        }
+        else{
+            createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes , strikeRate);
+        }
+    }
+    else{
+        createTeamFolder(teamName);
+        createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes , strikeRate);
+    }
 }
 
 
