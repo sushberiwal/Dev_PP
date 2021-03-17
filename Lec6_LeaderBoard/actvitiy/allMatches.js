@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const getMatch = require("./match");
 
 function getAllMatches(link){
-    request( link  , cb );
+    request( link  , cb ); //async function
 }
 
 function cb(error , response , data){
