@@ -12,5 +12,6 @@ while(idx <files.length){
         console.log(data+"");
         idx++;
     })
- 
 }
+
+

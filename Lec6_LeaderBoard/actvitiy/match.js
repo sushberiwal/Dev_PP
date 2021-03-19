@@ -9,6 +9,7 @@ function getMatch(link) {
   // async task
   console.log("Sending Request !!! ");
   count++;
+  // async function
   request(link, cb);
 }
 
@@ -23,8 +24,6 @@ function cb(error, response, data) {
   if(count == 0){
     console.table(leaderboard);
   }
-  
-
 }
 
 function parseData(html) {
