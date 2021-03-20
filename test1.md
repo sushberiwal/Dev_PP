@@ -14,6 +14,7 @@
 // scope => block, Function, global, lexical
 // real and fake function
 // arguments array
+// shadowing
 
 // execution context
 // hoisting
