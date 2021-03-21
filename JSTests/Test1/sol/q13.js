@@ -1,14 +1,4 @@
-Title: 
-The mystery reference 
-
-Meta-Tags:
-Javascript, JS, interview, questions, interview questions, scope, hoisting,execution context,practice,hard
-
-Description:
-Find output of the following:
-
 let a;
-
 console.log(a);
 
 function A() {
@@ -28,13 +18,12 @@ function A() {
   }
   C();
 }
-
 function B() {
   let a;
   console.log(a);
   
   function E() {
-    a = 6;
+    let a = 6;
     console.log(a);
     
   }
@@ -43,7 +32,6 @@ function B() {
   E();
   console.log(a);
 }
-
 function F() {
   console.log(a);
   a = 2;
@@ -55,39 +43,13 @@ F();
 B();
 A();
 
+// a = 2;
 
-
-Options: 
-A)
-Error
-
-B)
-undefined
-3
-undefined
-6
-6
-2
-2
-2
-
-
-C)
-undefined
-3
-undefined
-6
-6
-3
-3
-3
-
-D)
-2
-2
-2
-2
-2
-2
-2
-2
+// undefined
+// 3
+// undefined
+// 6
+// 6
+// 2
+// 2
+// 2
