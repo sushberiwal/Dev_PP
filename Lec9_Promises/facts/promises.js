@@ -2,8 +2,10 @@ const fs = require("fs");
 
 // B gets a pending promise          // A -> initially returns a pending promise
 let pendingPromise = fs.promises.readFile("./f2.txt"); // 100gb => 10 min
+
 console.log(pendingPromise);
 // pendingPromise => Promise object whose state is pending !!!
+
 
 // success callback => scb attached to pending promise
 pendingPromise.then(function(data){
