@@ -20,11 +20,6 @@ f1KaPromise.then(function(data){
 })
 .then(function(data){
     console.log(data+"");
-    let f3KaPromise = fs.promises.readFile("./f3.txt");
-    return f3KaPromise;
-})
-.then(function(data){
-    console.log(data+"");
 })
 
 
