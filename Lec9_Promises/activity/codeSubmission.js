@@ -10,7 +10,6 @@ let browserOpenPromise = puppeteer.launch({
   headless: false,
   defaultViewport: null,
   args: ["--start-maximized"],
-  slowMo : 100
 });
 // Promise<Pending>
 
@@ -24,29 +23,50 @@ browserOpenPromise
     tab = pages[0];
     let pageOpenPromise = tab.goto("https://www.hackerrank.com/auth/login");
     return pageOpenPromise;
-    //Promise<pending>
   })
   .then(function () {
-      let idTypePromise = tab.type("#input-1" , id);
-      return idTypePromise;
+    let idTypePromise = tab.type("#input-1", id);
+    return idTypePromise;
+  })
+  .then(function () {
+    let pwTypePromise = tab.type("#input-2", pw);
+    return pwTypePromise;
+  })
+  .then(function () {
+    let loginPromise = tab.click(
+      ".ui-btn.ui-btn-large.ui-btn-primary.auth-button.ui-btn-styled"
+    ); //navigation => page change
+    return loginPromise;
   })
   .then(function(){
-      let pwTypePromise = tab.type("#input-2" , pw);
-      return pwTypePromise;
+    waitAndClick('#base-card-1-link');
+  })
+  // .then(function () {
+  //   let waitPromise = tab.waitForSelector('#base-card-1-link' , {visible:true});
+  //   return waitPromise;
+  //   // Promise<Pending>
+  // })
+  // .then(function () {
+  //   // console.log("logged in to hackerrank !!!");
+  //   let ipKitClickedPromise = tab.click("#base-card-1-link"); // navigation
+  //   return ipKitClickedPromise;
+  // })
+  .then(function () {
+    let waitPromise = tab.waitForSelector('a[data-attr1="warmup"]' , {visible:true});
+    return waitPromise;
   })
   .then(function(){
-      let loginPromise = tab.click('.ui-btn.ui-btn-large.ui-btn-primary.auth-button.ui-btn-styled');
-      return loginPromise;
+    let warmupClickedPromise = tab.click('a[data-attr1="warmup"]'); // navigation
+    return warmupClickedPromise;
   })
   .then(function(){
-      console.log("logged in to hackerrank !!!");
+    console.log("Reached Warmup Page !!!");
   })
   .catch(function (error) {
     console.log(error);
   });
 
-// const browser = await puppeteer.launch();
-// const page = await browser.newPage();
-// await page.goto('https://example.com');
-// await page.screenshot({ path: 'example.png' });
-// await browser.close();
+function waitAndClick(selector){
+// wait 
+// click
+}
