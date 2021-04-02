@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const id = "savob68663@bombaya.com";
+const id = "xifov12632@aramidth.com";
 const pw = "123456789";
 let tab;
 let idx;
@@ -83,12 +83,19 @@ browserOpenPromise
     });
     // console.log(completeLinks);
     let oneQuesSolvePromise = solveQuestion(completeLinks[0]);
+    // 2k
+    for(let i=1; i<completeLinks.length ; i++){
+      oneQuesSolvePromise = oneQuesSolvePromise.then( function(){
+        let nextQuesSolvePromise = solveQuestion(completeLinks[i]);
+        return nextQuesSolvePromise;
+      })
+    }
+    // 10k
     return oneQuesSolvePromise;
   })
   .then(function () {
-    console.log("One Ques Solved Succesfully !!!!");
+    console.log("All Ques Solved Succesfully !!!!");
   })
-
   .catch(function (error) {
     console.log(error);
   });
@@ -213,6 +220,33 @@ function pasteCode() {
   });
 }
 
+function handleLockBtn(){
+  return new Promise( function(resolve , reject){
+    let waitPromise = tab.waitForSelector('.ui-btn.ui-btn-normal.ui-btn-primary.ui-btn-styled' , {visible:true , timeout:5000});
+    waitPromise.then(function(){
+      let lockBtnPromise = tab.$('.ui-btn.ui-btn-normal.ui-btn-primary.ui-btn-styled');
+      return lockBtnPromise;
+    })
+    .then(function(lockBtn){
+      // console.log(lockBtn);
+      let lockBtnClickPromise = lockBtn.click();
+      return lockBtnClickPromise;
+    })
+    .then(function(){
+      // clicked on lock btn
+      // lock btn found
+      console.log("lock btn found !!!");
+      resolve();
+    })
+    .catch(function(error){
+      // lock btn not found
+      console.log("lock btn not found !!!");
+      resolve();
+    })
+
+  })
+}
+
 function solveQuestion(qLink) {
   return new Promise(function (resolve, reject) {
     let gotoPromise = tab.goto(qLink);
@@ -220,6 +254,10 @@ function solveQuestion(qLink) {
       .then(function () {
         let waitAndClickPromise = waitAndClick('div[data-attr2="Editorial"]');
         return waitAndClickPromise;
+      })
+      .then(function(){
+        let lockBtnPromise = handleLockBtn();
+        return lockBtnPromise;
       })
       .then(function () {
         // this function will get code of c++ and set in gCode variable
