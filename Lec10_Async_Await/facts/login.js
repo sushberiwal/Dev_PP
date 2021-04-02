@@ -15,4 +15,4 @@ const pw = "123456789";
     await tab.type("#input-1", id);
     await tab.type("#input-2", pw);
     await tab.click(".ui-btn.ui-btn-large.ui-btn-primary.auth-button.ui-btn-styled");
-})();
+})();   
