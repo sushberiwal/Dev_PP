@@ -35,17 +35,18 @@ let challenges = require("./challenges");
     createChallengeLink = 'https://www.hackerrank.com'+createChallengeLink;
 
     // simultaenously open tabs for all the challenges
-    // for(let i=0 ; i<challenges.length ; i++){
-    //     addChallenge(challenges[i] , browser , createChallengeLink );
-    // }
+    for(let i=0 ; i<challenges.length ; i++){
+        addChallenge(challenges[i] , browser , createChallengeLink );
+        await tab.waitForTimeout(3000);
+    }
     
     // OR
 
     // add challenges one by one
-    for(let i=0 ; i<challenges.length ; i++){
-        // add a single challenge
-        await addChallenge(challenges[i] , browser , createChallengeLink );
-    }
+    // for(let i=0 ; i<challenges.length ; i++){
+    //     // add a single challenge
+    //     await addChallenge(challenges[i] , browser , createChallengeLink );
+    // }
     // await addChallenge(challenges[0] , browser , createChallengeLink);
 })();   
 
