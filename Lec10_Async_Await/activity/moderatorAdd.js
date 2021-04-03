@@ -33,11 +33,56 @@ const pw = "123456789";
 async function addModerators(browser , tab){
      
     //1. get all links of all the questions
-
+    await tab.waitForSelector('.backbone.block-center' , {visible:true});
+    let allATags = await tab.$$(".backbone.block-center");
+    // [<a />,<a />,<a />,<a />,<a />,<a /> ]
+    let allLinks = [];
+    for(let i=0 ; i<allATags.length ; i++){
+        let aTag = allATags[i];
+        let link = await tab.evaluate( function(elem){
+            return elem.getAttribute("href");
+        }   , aTag );
+        allLinks.push(link);
+    }
+    let completeLinks = allLinks.map( function(link){
+        return "https://www.hackerrank.com"+link;
+    });
     // loop on allLinks and call addModeratorToAQuestion for every quesLink
     //2. addModeratorsToAQuestion(quesLink , browser ); // it will add moderator to a single question
+    let allModAddPromise = []
+    for(let i=0 ; i<completeLinks.length ; i++){
+       let moderatorAddPromise = addModeratorToAQuestion(completeLinks[i] , browser);
+       allModAddPromise.push(moderatorAddPromise);
+    }
+    await Promise.all(allModAddPromise); // wait for all the moderator to be added to all questions
+
+
 
     // 3. if next button is not disabled then click on it
+    let allLis = await tab.$$('.pagination li');
+    let nextBtnLi = allLis[allLis.length-2];
+    let isDisabled = await tab.evaluate( function(elem){ return elem.classList.contains("disabled"); } , nextBtnLi );
+    if(isDisabled){
+        return;
+    }
+    else{
+        await nextBtnLi.click();
+        await addModerators(browser , tab);
+    }
     // 4. call addModerators(browser , tab);
+}
+
+
+async function addModeratorToAQuestion(qLink , browser){
+    let newTab = await browser.newPage();
+    await newTab.goto(qLink); 
+    await newTab.waitForSelector('li[data-tab="moderators"]' , {visible:true});
+    await newTab.waitForTimeout(1000);
+    await newTab.click('li[data-tab="moderators"]');
+    await newTab.waitForSelector('#moderator' , {visible:true});
+    await newTab.type('#moderator' , "Sushant");
+    await newTab.click('.btn.moderator-save');
+    await newTab.click('.save-challenge.btn.btn-green');
+    await newTab.close();
 }
 
