@@ -85,4 +85,3 @@ async function addModeratorToAQuestion(qLink , browser){
     await newTab.click('.save-challenge.btn.btn-green');
     await newTab.close();
 }
-
