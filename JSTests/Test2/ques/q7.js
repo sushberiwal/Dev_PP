@@ -13,7 +13,7 @@ setTimeout(function () {
     count--;
     if (count < 0) clearInterval(interval);
   });
-}, 500);
+}, 505);
 
 // options:
 

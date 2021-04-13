@@ -4,7 +4,7 @@ let a = ["a", "b"]
 a[2] = a 
 
 function f(a) {
-    a = a[2]
+    a = a[2] 
     console.log(a);
     let n = Array("a", "b")
     console.log(a[2] = n);

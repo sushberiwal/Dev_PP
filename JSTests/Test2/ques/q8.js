@@ -1,4 +1,4 @@
-/Q- Transducer is a higher order function which takes 3 parameter => an array, a function used for filtering and another function to map values and returns the resultant array without mutation
+//Q- Transducer is a higher order function which takes 3 parameter => an array, a function used for filtering and another function to map values and returns the resultant array without mutation
 
 // which of the following definitions is/are correct?
 
