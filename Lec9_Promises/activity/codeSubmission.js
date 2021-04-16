@@ -255,10 +255,10 @@ function solveQuestion(qLink) {
         let waitAndClickPromise = waitAndClick('div[data-attr2="Editorial"]');
         return waitAndClickPromise;
       })
-      .then(function(){
-        let lockBtnPromise = handleLockBtn();
-        return lockBtnPromise;
-      })
+      // .then(function(){
+      //   let lockBtnPromise = handleLockBtn();
+      //   return lockBtnPromise;
+      // })
       .then(function () {
         // this function will get code of c++ and set in gCode variable
         let codePromise = getCode();
