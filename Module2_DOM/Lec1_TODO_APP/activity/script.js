@@ -2,7 +2,7 @@ let todoInput = document.querySelector(".todo-input"); // todo input
 let addTodoButton = document.querySelector(".add-todo"); // add todo button
 let todosList = document.querySelector(".todos-list"); // empty ul
 
-addTodoButton.addEventListener("click" , function(){
+function addTodo(){
     let todo = todoInput.value;
     // "" , 0 , false , undefined
     if(todo){
@@ -20,24 +20,28 @@ addTodoButton.addEventListener("click" , function(){
         deleteButton.innerHTML = "DELETE";
         // <button class="delete-task">DELETE</button>
 
+        deleteButton.addEventListener("click" , function(event){
+            console.log("delete todo clicked !!!");
+            console.log(event);
+            // event.target.parentNode.remove();
+        })
+
         listItem.append(pTag);
         listItem.append(deleteButton);
-
         todosList.append(listItem);
         todoInput.value = "";
     }
+}
+
+addTodoButton.addEventListener("click" , function(){
+    addTodo()
 });
 
-// todoInput.addEventListener("keypress" , function(e){
-//     if(e.key == "Enter"){
-//         console.log("Enter pressed !!!");
-//     }
-// });
-
-{/* <li>
-    <p class="todo"></p>
-    <button class="delete-task">DELETE</button>
-</li> */}
+todoInput.addEventListener("keypress" , function(e){
+    if(e.key == "Enter"){
+        addTodo();
+    }
+});
 
 
 
