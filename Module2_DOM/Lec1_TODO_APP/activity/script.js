@@ -23,13 +23,15 @@ function addTodo(){
         deleteButton.addEventListener("click" , function(event){
             console.log("delete todo clicked !!!");
             console.log(event);
-            // event.target.parentNode.remove();
+            event.target.parentNode.remove();
         })
 
         listItem.append(pTag);
         listItem.append(deleteButton);
         todosList.append(listItem);
         todoInput.value = "";
+    }else{
+        alert("You Haven't Entered Any Todo !!!");
     }
 }
 
