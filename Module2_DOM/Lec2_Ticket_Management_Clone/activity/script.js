@@ -12,6 +12,32 @@ let allFilters = document.querySelectorAll(".ticket-filters div");
 let ticketContainer = document.querySelector(".tickets-container");
 let openModalBtn = document.querySelector(".open-modal");
 
+
+function loadTickets(){
+  if(localStorage.getItem("allTickets")){
+    let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+    for(let i=0 ; i<allTickets.length ; i++){
+      let {ticketId , ticketFilter , ticketContent} = allTickets[i];
+      
+      let ticketDiv = document.createElement("div");
+      ticketDiv.classList.add("ticket");
+      // set the html of the ticket wala div !!
+      ticketDiv.innerHTML = ` <div class="ticket-filter ${ticketFilter}"></div>
+      <div class="ticket-id">#${ticketId}</div>
+      <div class="ticket-content">${ticketContent}</div>`;
+  
+      // append the ticket on the UI !!!!
+      ticketContainer.append(ticketDiv);
+    }
+  }
+}
+loadTickets();
+
+
+
+
+
+
 openModalBtn.addEventListener("click", handleOpenModal);
 
 function handleOpenModal(e) {
@@ -44,7 +70,6 @@ function handleOpenModal(e) {
   // append modalDiv on the ui !!
   ticketContainer.append(modalDiv);
 }
-
 function createModal() {
   let modalDiv = document.createElement("div");
   modalDiv.classList.add("modal");
@@ -59,7 +84,6 @@ function createModal() {
 </div>`;
   return modalDiv;
 }
-
 function chooseModalFilter(e) {
   // get the filter name which is clicked !!!
   let selectedModalFilter = e.target.classList[1];
@@ -75,17 +99,17 @@ function chooseModalFilter(e) {
   // add active filter class on now selected filter 
   e.target.classList.add("active-filter");
 }
-
 function addTicket(e) {
   if (e.key == "Enter") {
     // get the content of the modal text box !!
     let modalText = e.target.textContent;
+    let ticketId = uid();
     // create a div and add class ticket to it
     let ticketDiv = document.createElement("div");
     ticketDiv.classList.add("ticket");
     // set the html of the ticket wala div !!
     ticketDiv.innerHTML = ` <div class="ticket-filter ${selectedFilter}"></div>
-    <div class="ticket-id">#exampleId</div>
+    <div class="ticket-id">#${ticketId}</div>
     <div class="ticket-content">${modalText}</div>`;
 
     // append the ticket on the UI !!!!
@@ -93,12 +117,38 @@ function addTicket(e) {
 
     // remove the modal from the ui !!!
     e.target.parentNode.remove();
-    
+
+    // ticket has been appended on the document !!!
+    // false , null , undefined , 0 , "" , NaN
+    if(!localStorage.getItem('allTickets')){
+      // first time ticket aayegi
+      let allTickets = [];
+
+      let ticketObject = {};
+      ticketObject.ticketId = ticketId;
+      ticketObject.ticketFilter = selectedFilter;
+      ticketObject.ticketContent = modalText;
+      allTickets.push(ticketObject);
+
+      localStorage.setItem("allTickets" , JSON.stringify(allTickets));
+    }
+    else{
+      // already tickets hain !!!
+      let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+      let ticketObject = {};
+      ticketObject.ticketId = ticketId;
+      ticketObject.ticketFilter = selectedFilter;
+      ticketObject.ticketContent = modalText;
+      allTickets.push(ticketObject);
+
+      localStorage.setItem("allTickets" , JSON.stringify(allTickets));
+    }
+
+
     // again set by default filter as black !!!
     selectedFilter = "black";
   }
 }
-
 function clearModalTextBox(e) {
   if (e.target.getAttribute("data-typed") == "true") {
     return;
@@ -106,14 +156,14 @@ function clearModalTextBox(e) {
   e.target.innerHTML = "";
   e.target.setAttribute("data-typed", "true");
 }
-
 // [ <div></div> ,<div></div> ,<div></div> ,<div></div>  ];
 for (let i = 0; i < allFilters.length; i++) {
   allFilters[i].addEventListener("click", chooseFilter);
 }
-
 function chooseFilter(e) {
   let filter = e.target.classList[1];
   let filterCode = filterCodes[filter];
   ticketContainer.style.background = filterCode;
 }
+
+
