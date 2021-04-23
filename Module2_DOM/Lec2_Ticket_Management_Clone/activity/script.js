@@ -66,6 +66,7 @@ function toggleTicketFilter(e){
   for(let i=0 ; i<allTickets.length ; i++){
     if(allTickets[i].ticketId == id){
       allTickets[i].ticketFilter = filters[idx];
+      break;
     }
   }
 
