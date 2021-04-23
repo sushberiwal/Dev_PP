@@ -5,13 +5,13 @@ let filterCodes = {
   black: "#34495e",
 };
 
-
 // this is the default filter selected for tickets !!!
 let selectedFilter = "black";
 
 let allFilters = document.querySelectorAll(".ticket-filters div");
 let ticketContainer = document.querySelector(".tickets-container");
 let openModalBtn = document.querySelector(".open-modal");
+let closeModalBtn = document.querySelector(".close-modal");
 
 
 function loadTickets(){
@@ -26,9 +26,16 @@ function loadTickets(){
       ticketDiv.classList.add("ticket");
       // set the html of the ticket wala div !!
       ticketDiv.innerHTML = ` <div class="ticket-filter ${ticketFilter}"></div>
+      <div class="ticket-info">
       <div class="ticket-id">#${ticketId}</div>
+      <div class="ticket-delete">
+      <i class="fas fa-trash" id=${ticketId}></i>
+      </div>
+      </div>
       <div class="ticket-content">${ticketContent}</div>`;
-  
+
+      ticketDiv.querySelector(".ticket-filter").addEventListener("click" , toggleTicketFilter);
+      ticketDiv.querySelector(".ticket-delete i").addEventListener("click" , handleTicketDelete);
       // append the ticket on the UI !!!!
       ticketContainer.append(ticketDiv);
     }
@@ -38,10 +45,49 @@ loadTickets();
 
 
 
-
-
-
 openModalBtn.addEventListener("click", handleOpenModal);
+closeModalBtn.addEventListener("click" , handleCloseModal);
+
+function toggleTicketFilter(e){
+  let filters = ["red" , "blue" , "green" , "black"];
+  let currentFilter = e.target.classList[1];
+  let idx = filters.indexOf(currentFilter);
+  idx++;
+  idx = idx%filters.length;
+
+  let currentTicket = e.target;
+  currentTicket.classList.remove(currentFilter);
+  currentTicket.classList.add(filters[idx]);
+
+  let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+  let id = currentTicket.nextElementSibling.children[0].textContent.split("#")[1];
+  console.log(id);
+
+  for(let i=0 ; i<allTickets.length ; i++){
+    if(allTickets[i].ticketId == id){
+      allTickets[i].ticketFilter = filters[idx];
+    }
+  }
+
+  localStorage.setItem("allTickets" , JSON.stringify(allTickets));
+}
+
+
+function handleTicketDelete(e){
+  let ticketToBeDeleted = e.target.id;
+  let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+  let filteredTickets = allTickets.filter(function(ticketObject){
+    return ticketObject.ticketId != ticketToBeDeleted;
+  })
+  localStorage.setItem("allTickets" , JSON.stringify(filteredTickets));
+  loadTickets();
+}
+
+function handleCloseModal(e){
+  if(document.querySelector(".modal")){
+    document.querySelector(".modal").remove();
+  }
+}
 
 function handleOpenModal(e) {
   let modal = document.querySelector(".modal");
@@ -112,8 +158,15 @@ function addTicket(e) {
     ticketDiv.classList.add("ticket");
     // set the html of the ticket wala div !!
     ticketDiv.innerHTML = ` <div class="ticket-filter ${selectedFilter}"></div>
-    <div class="ticket-id">#${ticketId}</div>
+    <div class="ticket-info">
+      <div class="ticket-id">#${ticketId}</div>
+      <div class="ticket-delete">
+      <i class="fas fa-trash" id=${ticketId}></i>
+      </div>
+      </div>
     <div class="ticket-content">${modalText}</div>`;
+    ticketDiv.querySelector(".ticket-filter").addEventListener("click" , toggleTicketFilter);
+    ticketDiv.querySelector(".ticket-delete").addEventListener("click" , handleTicketDelete);
 
     // append the ticket on the UI !!!!
     ticketContainer.append(ticketDiv);
@@ -202,9 +255,17 @@ function loadSelectedTickets(ticketFilter){
       ticketDiv.classList.add("ticket");
       // set the html of the ticket wala div !!
       ticketDiv.innerHTML = ` <div class="ticket-filter ${ticketFilter}"></div>
+      <div class="ticket-info">
       <div class="ticket-id">#${ticketId}</div>
+      <div class="ticket-delete">
+      <i class="fas fa-trash" id=${ticketId}></i>
+      </div>
+      </div>
       <div class="ticket-content">${ticketContent}</div>`;
-  
+
+      ticketDiv.querySelector(".ticket-filter").addEventListener("click" , toggleTicketFilter);
+      ticketDiv.querySelector(".ticket-delete").addEventListener("click" , handleTicketDelete);
+      
       // append the ticket on the UI !!!!
       ticketContainer.append(ticketDiv);
     }
