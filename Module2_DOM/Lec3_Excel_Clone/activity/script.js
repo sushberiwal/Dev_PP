@@ -28,32 +28,41 @@ for(let i=0 ; i<allCells.length ; i++){
 
     allCells[i].addEventListener("blur" , function(e){
         lastSelectedCell = e.target;
+        
         let cellValue = e.target.textContent;
+        
         let rowId = e.target.getAttribute("rowid");
         let colId = e.target.getAttribute("colid");
         let cellObject = db[rowId][colId];
+        
         if(cellObject.value == cellValue){
             return;
         }
-        // update the cellobject value if not same
+        
+        // db update , cellobject value if not same
         cellObject.value = cellValue;
+
+        // updateChildrens
+        updateChildrens(cellObject);
     })
 }
 
 
-
+// when someone leaves the formula input !!
 formulaInput.addEventListener("blur" , function(e){
     let formula = e.target.value;
+    // ( A1 + A2 )
     if(formula){
         let {rowId , colId} = getRowIdColIdFromElement(lastSelectedCell);
         let cellObject = db[rowId][colId];
-        let computedValue = solveFormula(formula);
+        let computedValue = solveFormula(formula , cellObject);
         // formula update
         cellObject.formula = formula;
         // cellObject value update
         cellObject.value = computedValue;
         // ui update
         lastSelectedCell.textContent = computedValue;
+        console.log(db);
     }
 })
 
