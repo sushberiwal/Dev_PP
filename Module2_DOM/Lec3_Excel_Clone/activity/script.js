@@ -38,12 +38,32 @@ for(let i=0 ; i<allCells.length ; i++){
         if(cellObject.value == cellValue){
             return;
         }
+
+        if(cellObject.formula){
+            removeFormula(cellObject);
+            //formulaInput value = ""
+            formulaInput.value="";
+        }
         
         // db update , cellobject value if not same
         cellObject.value = cellValue;
 
         // updateChildrens
         updateChildrens(cellObject);
+    })
+
+    allCells[i].addEventListener("keydown" , function(e){
+        if(e.key == "Backspace"){
+            let cell = e.target;
+            let {rowId , colId} = getRowIdColIdFromElement(cell);
+            let cellObject = db[rowId][colId];
+            if(cellObject.formula){
+                cellObject.formula = "";
+                formulaInput.value = "";
+                removeFormula(cellObject);
+                cell.textContent = "";
+            }
+        }
     })
 }
 
