@@ -9,7 +9,6 @@ let lastSelectedCell;
 cellsContentDiv.addEventListener("scroll" , function(e){
     let top = e.target.scrollTop;
     let left = e.target.scrollLeft;
-
     topRow.style.top = top + "px";
     topLeftCell.style.top = top + "px";
     topLeftCell.style.left = left + "px";
@@ -20,6 +19,7 @@ let rowId;
 let colId;
 
 for(let i=0 ; i<allCells.length ; i++){
+    
     allCells[i].addEventListener("click" , function(e){
         rowId = Number(e.target.getAttribute("rowid"));
         colId = Number(e.target.getAttribute("colid"));
@@ -48,6 +48,11 @@ for(let i=0 ; i<allCells.length ; i++){
         // updateChildrens
         updateChildrens(cellObject);
 
+        if(cellObject.visited){
+            return;
+        }
+        cellObject.visited = true;
+        visitedCells.push({rowId:rowId , colId:colId})
         console.log(sheetsDB);
     })
 
@@ -65,7 +70,6 @@ for(let i=0 ; i<allCells.length ; i++){
         }
     })
 }
-
 
 // when someone leaves the formula input !!
 formulaInput.addEventListener("blur" , function(e){
@@ -90,6 +94,13 @@ formulaInput.addEventListener("blur" , function(e){
         lastSelectedCell.textContent = computedValue;
         // update childrens !!!
         updateChildrens(cellObject);
+
+        if(cellObject.visited){
+            return;
+        }
+        cellObject.visited = true;
+        visitedCells.push({rowId:rowId , colId:colId})
+        console.log(sheetsDB);
     }
 })
 
