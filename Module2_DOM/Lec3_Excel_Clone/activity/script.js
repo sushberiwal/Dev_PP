@@ -31,28 +31,24 @@ for(let i=0 ; i<allCells.length ; i++){
 
     allCells[i].addEventListener("blur" , function(e){
         lastSelectedCell = e.target;
-        
         let cellValue = e.target.textContent;
-        
         // let rowId = e.target.getAttribute("rowid");
         // let colId = e.target.getAttribute("colid");
         let cellObject = db[rowId][colId];
-        
         if(cellObject.value == cellValue){
             return;
         }
-
         if(cellObject.formula){
             removeFormula(cellObject);
             //formulaInput value = ""
             formulaInput.value="";
         }
-        
         // db update , cellobject value if not same
         cellObject.value = cellValue;
-
         // updateChildrens
         updateChildrens(cellObject);
+
+        console.log(sheetsDB);
     })
 
     allCells[i].addEventListener("keydown" , function(e){
