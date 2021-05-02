@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeChat</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="left-view">
+            <div class="me">
+                <div class="user-image">
+                    <img src="default.jpg" alt="">
+                </div>
+                <div class="user-name"></div>
+            </div>
+            <div class="online-list">
+                <!-- <div class="user">
+                    <div class="user-image">
+                        <img src="default.jpg" alt="">
+                    </div>
+                    <div class="user-name">Tony</div>
+                </div> -->
+            </div>
+        </div>
+        <div class="right-view">
+            <div class="chat-window">
+            </div>
+            <div class="chat-input-box">
+                <input type="text" class="chat-input">
+            </div>
+        </div>
+    </div>
+    <!-- socket io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script>
+        const socket = io();
+    </script>
+    <script src="./script.js"></script>
+    <script src="./socket.js"></script>
+</body>
+</html>
