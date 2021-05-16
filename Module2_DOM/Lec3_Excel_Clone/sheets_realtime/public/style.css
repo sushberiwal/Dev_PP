@@ -1,0 +1,287 @@
+:root {
+    --border-color: #EFF0EF;
+    --cell-background: #F5F6F5;
+    --active-cell: #2ecc71;
+    --cell-selected: #E5E6E5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.85rem;
+}
+
+.menu {
+    /* border: 1px solid; */
+    height: 30px;
+    display: flex;
+    background: #ecf0f1;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+
+.menu-options {
+    /* border: 1px solid; */
+    height: 40px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.address-content {
+    /* border: 1px solid; */
+    height: 20px;
+    display: flex;
+}
+
+.cells-content {
+    height: calc( 100vh - 90px);
+    /* background: lightgreen; */
+    overflow: auto;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.sheets {
+    /* border: 1px solid; */
+    height: 30px;
+    display: flex;
+    background: #ecf0f1;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    /* border: 1px solid; */
+    min-height: 20px;
+    min-width: 90px;
+    max-width: 70px;
+    border-left: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    outline: none;
+}
+
+.top-left-cell {
+    height: 20px;
+    width: 40px;
+    background: var(--cell-background);
+    position: absolute;
+    z-index: 3;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.top-row {
+    display: flex;
+    position: absolute;
+    background: var(--cell-background);
+    top: 0px;
+    left: 40px;
+    z-index: 2;
+    /* border-bottom: 1px solid var(--border-color); */
+}
+
+.top-row-cell {
+    /* border: 1px solid; */
+    min-height: 20px;
+    min-width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+.left-col {
+    background: var(--cell-background);
+    /* width: 40px; */
+    position: absolute;
+    top: 20px;
+    z-index: 2;
+}
+
+.left-col-cell {
+    height: 20px;
+    width: 40px;
+    /* border: 1px solid; */
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cells {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+}
+
+.add-sheet {
+    width: 30px;
+    /* background: aqua; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid lightgray;
+}
+
+.add-sheet .fas {
+    color: #2ecc71;
+}
+
+.sheets-list {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.sheet {
+    border-right: 1px solid lightgray;
+    width: 70px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.active-sheet {
+    background: white;
+    font-weight: bold;
+}
+
+.menu div {
+    width: 60px;
+    /* background: aquamarine; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid lightgray;
+    cursor: pointer;
+}
+
+.file {
+}
+
+.home {
+}
+
+.file-menu-options {
+}
+
+.home-menu-options {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.active-menu {
+    background: white;
+    font-weight: bold;
+}
+
+.hide {
+    display: none;
+}
+
+.font-style {
+    display: flex;
+    width: 150px;
+    height: 60%;
+    justify-content: space-around;
+    align-items: center;
+    border-right: 1px solid lightgray;
+}
+
+.font-style div {
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.font-style div:hover {
+    background: #bdc3c7;
+    opacity: 0.5;
+}
+
+.font-alignments {
+}
+
+.font-alignments div {
+}
+
+.font-alignments .fas {
+}
+
+.font-size {
+    width: 200px;
+}
+
+.font-size select {
+    background: var(--cell-background);
+    outline: none;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.font-type {
+    width: 110px;
+}
+
+.font-text-size {
+    width: 55px;
+}
+
+.font-style div .fas {
+}
+
+.active-font-style {
+    background: #bdc3c7;
+}
+
+#address {
+    width: 50px;
+    border: none;
+    text-align: center;
+}
+
+#formula {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-left: 1px solid var(--border-color);
+    padding: 5px;
+}
+
+.active-cell {
+    border: 2px solid var(--active-cell);
+}
+
+.cell-selected {
+    background: #E5E6E5;
+}
+
+.realtime-cell {
+    border: 2px solid #9b59b6;
+    position: relative;
+}
+
+.username-div {
+    position: absolute;
+    /* background: #9b59b6; */
+    color: #9b59b6;
+    /* padding: 4px; */
+    font-size: 10px;
+    left: 90px;
+    top: 11px;
+}
