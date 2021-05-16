@@ -27,6 +27,15 @@ for (let i = 0; i < allCells.length; i++) {
     addressInput.value = address;
     formulaInput.value = cellObject.formula;
 
+
+    // add active class
+    if(lastSelectedCell){
+      lastSelectedCell.classList.remove("active-cell");
+    }
+    e.target.classList.add("active-cell");
+
+
+
     cellObject.fontStyle.bold
       ? document.querySelector(".bold").classList.add("active-font-style")
       : document.querySelector(".bold").classList.remove("active-font-style");

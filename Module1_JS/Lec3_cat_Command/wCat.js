@@ -26,7 +26,6 @@ for (let i = 0; i < files.length; i++) {
   fileKaData += "\r\n";
 }
 // console.log(fileKaData);
-
 // console.log(fileKaData);
 
 if(!flags.length){
@@ -34,13 +33,9 @@ if(!flags.length){
   return;
 }
 
-
-
 let data = fileKaData.split("\r\n");
 
-
 let removedSpaces = [];
-
 // node wCat.js -s -b -n f1.txt
 // node wCat.js -s -n f1.txt
 

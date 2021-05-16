@@ -14,6 +14,7 @@
 // 
 // hi i am going !
 
+
 // -b flag
 
 // cat -s -b f1.txt => add line number to non empty lines

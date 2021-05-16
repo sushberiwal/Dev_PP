@@ -2,13 +2,20 @@ let fs = require("fs");
 
 let f1KaData = fs.readFileSync("./f1.txt");
 
+
 f1KaData = f1KaData+"";
+
+// console.log(f1KaData);
 
 // -s => removes extra spaces
 let data=f1KaData.split("\r\n");
 console.log(data);
+
+
+
 let removedSpaces = [];
 let emptyPushed = false;
+
 function removeLargeSpaces(data){
     for(let i=0 ; i<data.length ; i++){
         if( data[i] == '' && !emptyPushed ){
@@ -20,9 +27,12 @@ function removeLargeSpaces(data){
         }
     }
 }
-removeLargeSpaces(data);
-let joinedString = removedSpaces.join("\n");
-console.log(joinedString);
+// removeLargeSpaces(data);
+
+// console.log(removedSpaces);
+
+// let joinedString = removedSpaces.join("\n");
+// console.log(joinedString);
 
 
 // -b => add line numbers 
