@@ -71,6 +71,8 @@ function initUI(){
     // }
     for(let i=0 ; i<visitedCells.length ; i++){
       let {rowId , colId} = visitedCells[i];
-      document.querySelector(`div[rowid="${rowId}"][colid="${colId}"]`).innerHTML = "";
+      let cell = document.querySelector(`div[rowid="${rowId}"][colid="${colId}"]`);
+      cell.innerHTML = "";
+      cell.style = "";
     }
 }

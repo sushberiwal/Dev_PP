@@ -1,8 +1,8 @@
 :root {
     --border-color: #EFF0EF;
     --cell-background: #F5F6F5;
-    --active-cell:#2ecc71;
-    --cell-selected:#E5E6E5;
+    --active-cell: #2ecc71;
+    --cell-selected: #E5E6E5;
 }
 
 * {
@@ -193,7 +193,7 @@
 .font-style {
     display: flex;
     width: 150px;
-    height: 100%;
+    height: 60%;
     justify-content: space-around;
     align-items: center;
     border-right: 1px solid lightgray;
@@ -212,6 +212,34 @@
 .font-style div:hover {
     background: #bdc3c7;
     opacity: 0.5;
+}
+
+.font-alignments {
+}
+
+.font-alignments div {
+}
+
+.font-alignments .fas {
+}
+
+.font-size {
+    width: 200px;
+}
+
+.font-size select {
+    background: var(--cell-background);
+    outline: none;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.font-type {
+    width: 110px;
+}
+
+.font-text-size {
+    width: 55px;
 }
 
 .font-style div .fas {
@@ -235,10 +263,10 @@
     padding: 5px;
 }
 
-.active-cell{
+.active-cell {
     border: 2px solid var(--active-cell);
 }
 
-.cell-selected{
+.cell-selected {
     background: #E5E6E5;
 }

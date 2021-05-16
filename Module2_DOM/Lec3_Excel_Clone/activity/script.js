@@ -41,6 +41,8 @@ for (let i = 0; i < allCells.length; i++) {
     addressInput.value = address;
     formulaInput.value = cellObject.formula;
 
+
+    // bold underline italic set hojata
     cellObject.fontStyle.bold
       ? document.querySelector(".bold").classList.add("active-font-style")
       : document.querySelector(".bold").classList.remove("active-font-style");
@@ -54,6 +56,15 @@ for (let i = 0; i < allCells.length; i++) {
       : document
           .querySelector(".underline")
           .classList.remove("active-font-style");
+
+    // alignment set hojae
+    // 1. remove already selected text align if exist
+    if(lastSelectedCell){
+      document.querySelector(".font-alignments .active-font-style").classList.remove("active-font-style");
+    }
+    // 2. set active text align for the selected cell
+   let textAlignment = cellObject.textAlign;
+   document.querySelector(`.${textAlignment}`).classList.add("active-font-style");
   });
 
   allCells[i].addEventListener("blur", function (e) {
