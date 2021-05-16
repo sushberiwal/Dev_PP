@@ -2,6 +2,7 @@
     --border-color: #EFF0EF;
     --cell-background: #F5F6F5;
     --active-cell:#2ecc71;
+    --cell-selected:#E5E6E5;
 }
 
 * {
@@ -236,4 +237,8 @@
 
 .active-cell{
     border: 2px solid var(--active-cell);
+}
+
+.cell-selected{
+    background: #E5E6E5;
 }
