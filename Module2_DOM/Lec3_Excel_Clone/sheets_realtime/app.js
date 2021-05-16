@@ -33,11 +33,13 @@ io.on("connection" , function(socket){
                 username  = userList[i].username;
             }
         }
-
-        socket.broadcast.emit("setRealtimeCell" , {username , ...cellCordinates  })
+        socket.broadcast.emit("setRealtimeCell" , {username , ...cellCordinates  });
     })
 
-    
+    socket.on("cellValue" , function(cellValue){
+        socket.broadcast.emit("setCellValue" , cellValue);
+    })
+
 })
 
 
