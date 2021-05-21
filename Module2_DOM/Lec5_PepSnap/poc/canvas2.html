@@ -27,8 +27,20 @@
       });
 
       let ctx = canvas.getContext("2d");
-      
-      
+      let img = document.createElement("img");
+      img.src = "./1.jpg";
+      img.addEventListener("load" , function(){
+        //   canvas pe draw image()
+        ctx.drawImage(img , 0 , 0 , 1280 , 720);
+        // download canvas as a image ???????
+        let imageUrl = canvas.toDataURL("image/jpg");
+        let aTag = document.createElement("a");
+        aTag.download = "photo.jpg";
+        aTag.href = imageUrl;
+        aTag.click();
+      })
+
+
     </script>
   </body>
 </html>
