@@ -15,15 +15,20 @@ let mediaRecorder;
             console.log("Inside on start !!");
             console.log(e);
         }
+        
+        mediaRecorder.ondataavailable = function(e){
+            console.log("Inside on data available !!");
+            console.log(e.data);
+            // let blob = new Blob( e.data , {"type":"video/mp4"});
+            recordedData = e.data;
+            saveVideoToFs();
+        }
+        
         mediaRecorder.onstop = function(e){
             console.log("Inside on stop !!");
             console.log(e);
         }
-        mediaRecorder.ondataavailable = function(e){
-            console.log("Inside on data available !!");
-            recordedData = e.data;
-            saveVideoToFs();
-        }
+        
         // attach click event on recordButton
         recordButton.addEventListener("click" , function(){
             if(recordingState){
@@ -44,14 +49,15 @@ let mediaRecorder;
 function saveVideoToFs(){
     console.log("Saving Video");
     // file object in recordedData
-    let videoUrl = URL.createObjectURL(recordedData );
+    let videoUrl = URL.createObjectURL(recordedData ); // convert Blob object into Blob Url
     console.log(videoUrl);
 
     let aTag = document.createElement("a");
-    aTag.download = "video.mp3";
+    aTag.download = "video.mp4";
     aTag.href = videoUrl;
 
-    aTag.click(); 
+    console.log(aTag);
+    aTag.click(); // download start for video
     aTag.remove();
 }
 
