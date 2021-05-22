@@ -16,7 +16,6 @@ video {
 }
 
 .media-controls {
-    /* background: antiquewhite; */
     height: 300px;
     width: 200px;
     position: absolute;
@@ -31,7 +30,6 @@ video {
 .media-controls>div {
     height: 80px;
     width: 80px;
-    /* background: brown; */
     border-radius: 50%;
     border: 8px solid white;
     display: flex;
@@ -51,4 +49,25 @@ video {
     height: 70%;
     width: 70%;
     border-radius: 50%;
+}
+
+
+.record-animate{
+    animation: scaleUpDown 1s infinite;
+}
+
+.capture-animate{
+    animation: scaleUpDown 1s 1;
+}
+
+@keyframes scaleUpDown{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
