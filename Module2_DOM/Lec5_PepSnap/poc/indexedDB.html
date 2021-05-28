@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index DB Demo</title>
+</head>
+<body>
+
+
+    <script>
+        let db;
+
+        // db open // create db
+        let dbRequest = indexedDB.open("Gallery");
+        
+        console.log(dbRequest);
+
+        dbRequest.onupgradeneeded = function(e){
+            console.log("In Upgrade Event");
+            // console.log(e);
+            db = e.target.result;
+            console.log(db);
+        }
+
+        
+
+        dbRequest.onsuccess = function(e){
+            console.log("In Success Event");
+            db = e.target.result;
+            console.log(db);
+        };
+
+
+    </script>
+</body>
+</html>
