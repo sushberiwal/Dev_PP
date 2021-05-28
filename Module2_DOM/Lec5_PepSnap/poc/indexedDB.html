@@ -5,34 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index DB Demo</title>
+
+    
 </head>
 <body>
+   <div>
+       Database Name <input id="database-name" type="text">
+       Version <input id="database-version" type="text">
+       <button id="openDB">Open Database</button>
+   </div>
+
+   <div>
+       mid <input id="media-id" type="text">
+       type <input id="media-type" type="text">
+       <button id="addMedia">Add Media</button>
+   </div>
+
 
 
     <script>
         let db;
 
-        // db open // create db
-        let dbRequest = indexedDB.open("Gallery");
-        
-        console.log(dbRequest);
+        let dbName = document.querySelector("#database-name");
+        let dbVersion = document.querySelector("#database-version");
+        let openDBBtn = document.querySelector("#openDB");
 
-        dbRequest.onupgradeneeded = function(e){
-            console.log("In Upgrade Event");
-            // console.log(e);
-            db = e.target.result;
-            console.log(db);
+        let mid = document.querySelector("#media-id");
+        let mediaType = document.querySelector("#media-type");
+        let addMediaBtn = document.querySelector("#addMedia");
+        
+        openDBBtn.addEventListener("click" , openDB);
+        addMediaBtn.addEventListener("click" , addMedia);
+        
+      
+
+        function openDB(){
+            // db open // create db
+            let dbRequest = indexedDB.open( dbName.value  , dbVersion.value);
+            dbRequest.onupgradeneeded = function(e){
+                alert("In Upgrade Event");
+                // console.log(e);
+                db = e.target.result;
+                let mediaTable = db.createObjectStore("Media" , {keyPath : "mid"});
+            }
+            dbRequest.onsuccess = function(e){
+                alert("In Success Event");
+                db = e.target.result;
+                console.log(db);
+            };
+            dbRequest.onerror = function(e){
+                alert("In Error Event !");
+                console.log(e);
+            }
         }
-
-        
-
-        dbRequest.onsuccess = function(e){
-            console.log("In Success Event");
-            db = e.target.result;
-            console.log(db);
-        };
-
-
     </script>
 </body>
 </html>
