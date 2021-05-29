@@ -3,8 +3,10 @@ let recordButton = document.querySelector("#record-video");
 let photoButton = document.querySelector("#capture-photo");
 let zoomIn = document.querySelector("#in");
 let zoomOut = document.querySelector("#out");
+
+
 let recordingState = false;
-let constraints = { video: true };
+let constraints = { video: true  };
 let recordedData;
 let mediaRecorder;
 
@@ -72,7 +74,7 @@ function saveVideoToFs() {
   // file object in recordedData
   let blob = new Blob( [recordedData] , {type:"video/mp4"} );
 
-  
+
   let iv = setInterval( function(){
     if(db){
       saveMedia("video" , blob);
@@ -123,3 +125,5 @@ function capturePhotos() {
   // aTag.href = imageUrl;
   // aTag.click();
 }
+
+
