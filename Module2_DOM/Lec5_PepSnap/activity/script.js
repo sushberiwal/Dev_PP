@@ -67,10 +67,6 @@ let currZoom = 1;
   });
 })();
 
-
-
-
-
 function saveVideoToFs() {
   console.log("Saving Video");
   // file object in recordedData
