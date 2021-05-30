@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.tools-content {
+    /* background: lightcyan; */
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tools {
+    background: aliceblue;
+    height: 80%;
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    align-items: center;
+    /* border: 1px solid lightgray; */
+}
+
+.tool {
+    height: 80%;
+    width: 10%;
+}
+
+.tool img {
+    height: 100%;
+    width: 100%;
+}
+
+.canvas-content {
+    /* width: 100%; */
+    /* height: calc(100vh - 60px); */
+    overflow: hidden;
+}
+
+#canvas {
+    /* background: lightblue; */
+}

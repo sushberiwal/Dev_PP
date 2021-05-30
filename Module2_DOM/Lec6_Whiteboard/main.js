@@ -1,3 +1,10 @@
+// create a mian.js file
+// npm init -y
+// npm i electron
+// add this => "start":"electron ."
+// in scripts in package.json file
+
+
 const electron = require("electron");
 
 
@@ -9,14 +16,14 @@ function createWindow(){
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration:true // enable node in this app
+            nodeIntegration:true //enable node in this app
           }
       })
-      
-      mainWindow.loadFile("index.html").then( function(){
+
+      mainWindow.loadFile("public/index.html").then( function(){
           mainWindow.webContents.openDevTools(); //open dev tools
           mainWindow.maximize();
-          mainWindow.removeMenu();
+        //   mainWindow.removeMenu();
       });
 }
 
