@@ -44,10 +44,9 @@ function redrawLine(){
 }
 
 function redoLine(){
-    if(redoDB.length >=1){
+    if(redoDB.length >= 1){
         let line = redoDB.pop();
         for(let j=0 ; j<line.length ; j++){
-
             let pointObject = line[j];
             if(pointObject.type=="md"){
                 ctx.strokeStyle = pointObject.color;
