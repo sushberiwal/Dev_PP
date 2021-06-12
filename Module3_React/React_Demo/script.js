@@ -16,4 +16,4 @@ function Hello(props) {
 }
 
 // what to render , and where to render
-ReactDOM.render(<BigHello></BigHello>, document.querySelector("#root"));
+ReactDOM.render(<BigHello></BigHello> , document.querySelector("#root"));
