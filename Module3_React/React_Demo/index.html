@@ -15,17 +15,11 @@
       src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
       crossorigin
     ></script>
+    <!-- babel -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div id="root"></div>
-
-    <script>
-
-      // what to render , and where to render
-      ReactDOM.render(
-        React.createElement("h1", null, "Hey i am rendered from react !!"),
-        document.querySelector("#root")
-      );
-    </script>
+      <div id="root"></div>
+      <script type="text/babel" src="./script.js"></script>
   </body>
 </html>
