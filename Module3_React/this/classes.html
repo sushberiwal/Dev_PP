@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Print Details</button>
+    <script>
+        class Person{
+            // constructor
+            constructor(name , age){
+                this.name = name;
+                this.age = age;
+            }
+
+            getDetails(){
+                console.log(this);
+                console.log(`The name is ${this.name} and age is ${this.age}`)
+            }
+
+            setDetails(newName , newAge){
+                this.name = newName;
+                this.age = newAge;
+            }
+        }
+
+        let steve = new Person("steve" , 100);
+        // console.log(steve);
+        // steve.getDetails();
+
+
+        // console.log(steve.getDetails);
+        // let fun = steve.getDetails;
+        // fun();
+
+
+        // let arr = ["100","200"]; // new Array();
+        // console.log(arr);
+
+
+       
+        let btn = document.querySelector("button");
+        btn.addEventListener("click" , ()=>{
+            console.log(this)
+        });
+
+    </script>
+</body>
+</html>

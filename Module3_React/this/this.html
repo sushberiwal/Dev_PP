@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // let obj = {
+    //     name : "steve" ,
+    //     sayHi : function(){
+    //         console.log(this); // this will be pointing to current object
+    //         console.log("Function Says hi !!!!!");
+    //         function inside(){
+    //             console.log(this); // window || current obj
+    //             console.log("Inside function !");
+    //         }
+    //         inside();
+    //     }
+    // }
+
+    // 1. functions inside a obj is known as method !
+    // obj.sayHi(); // method call/invoke
+
+    // let fun = obj.sayHi;
+    // fun(); //simple function call
+
+    // 2. Simple functions are known as function
+
+    // function callMe(){
+    //     console.log(this);
+    //     console.log("Call me function called !!");
+    // }
+
+    // callMe(); // function invoke/call
+  </script>
+
+  <script>
+    // let obj = {
+    //     name : "steve" ,
+    //     sayHi : function(){
+    //         console.log(this); // this will be pointing to current object
+    //         console.log("Function Says hi !!!!!");
+
+    //         function inside(){
+    //             console.log(this); // window || current obj
+    //             console.log("Inside function !");
+    //         }
+
+    //         let bindedFunction = inside.bind(obj); // this will be set to obj
+
+    //         // inside();
+    //         bindedFunction();
+    //     }
+    // }
+    // obj.sayHi();
+  </script>
+
+  <script>
+    let obj = {
+      name: "steve",
+      sayHi: function () {
+        console.log(this); // this will be pointing to current object
+        console.log("Function Says hi !!!!!");
+
+        const inside = () => {
+          console.log(this);
+          console.log("Inside function !");
+        };
+
+        inside();
+      },
+    };
+
+    obj.sayHi();
+  </script>
+</html>
