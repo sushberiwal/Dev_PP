@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "./Components/Header/Header.jsx";
 import Movies from "./Components/Movies/Movies.jsx";
 import axios from "axios";
-import { API_KEY, API_URL, IMAGE_URL } from "./API/secrets.js";
+import { API_KEY, API_URL } from "./API/secrets.js";
 
 class App extends Component {
   state = {
@@ -18,16 +18,28 @@ class App extends Component {
     let data = await axios.get(API_URL + "/search/movie", {
       params: { api_key: API_KEY, page: 1, query: this.state.currentMovie },
     });
-    let moviesData = data.data.results;
+    console.log(data);
+    let moviesData = data.data.results.slice(0,10);
     this.setState({
       moviesData:moviesData
+    })
+  }
+
+  setMovies = async(newMovieName) =>{
+    let data = await axios.get(API_URL + "/search/movie", {
+      params: { api_key: API_KEY, page: 1, query: newMovieName },
+    });
+    let moviesData = data.data.results.slice(0,10);
+    this.setState({
+      moviesData:moviesData,
+      currentMovie:newMovieName
     })
   }
 
   render() {
     return (
       <div className="App">
-        <Header></Header>
+        <Header setMovies={this.setMovies}></Header>
         <Movies movies={this.state.moviesData}></Movies>
       </div>
     );

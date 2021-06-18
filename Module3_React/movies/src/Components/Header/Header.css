@@ -1,0 +1,28 @@
+.header{
+/* background: chartreuse; */
+height: 50px;
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.logo{
+    height: 70%;
+    width: 20%;
+    /* background: coral; */
+}
+
+.logo img{
+    height: 100%;
+    width: 100%;
+}
+
+.search-btn{
+
+}
+
+.search-btn input{
+    outline:none;
+    border:none;
+    text-align: center;
+}
