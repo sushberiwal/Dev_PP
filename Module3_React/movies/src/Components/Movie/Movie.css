@@ -4,6 +4,11 @@
   font-size: 0.6rem;
   color: white;
   background-color: #161a1d;
+  transition: transform 0.5s;
+}
+
+.movie-item:hover{
+  transform: scale(1.1);
 }
 
 .movie-poster {
