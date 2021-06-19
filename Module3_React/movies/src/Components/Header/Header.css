@@ -26,3 +26,19 @@ align-items: center;
     border:none;
     text-align: center;
 }
+
+.header-links{
+/* background-color: aquamarine; */
+width: 20%;
+display: flex;
+justify-content: space-evenly;
+}
+
+.header-link{
+
+}
+
+.header-link a{
+    text-decoration: none;
+    color:#DB202C;
+}
