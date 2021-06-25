@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const UseState = () => {
+  
   const [count, setCount] = useState(1);
   const [color, setColor] = useState("blue");
 
@@ -11,9 +12,6 @@ const UseState = () => {
     //   return { ...prevState, count: prevState.count + 1 };
     // });
     // setCount((prevCount) => prevCount + 1);
-    // this.setState({
-    //     count : this.state.count+1;
-    // })
   };
 
   const decrementValue = () => {
