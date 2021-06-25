@@ -4,6 +4,7 @@ import Movies from "./Components/Movies/Movies.jsx";
 import Pagination from "./Components/Pagination/Pagination.jsx";
 import Favourite from "./Components/Favourite/Favourite.jsx";
 import MoviePage from "./Components/MoviePage/MoviePage.jsx";
+import HomeView from "./Components/HomeView/HomeView.jsx";
 import axios from "axios";
 import { API_KEY, API_URL } from "./API/secrets.js";
 
@@ -108,9 +109,12 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header setMovies={this.setMovies}></Header>
-
           <Switch>
             <Route path="/" exact>
+              <HomeView></HomeView>
+            </Route>
+
+            <Route path="/more" exact>
               {this.state.moviesData.length ? (
                 <React.Fragment>
                   <Movies movies={this.state.moviesData}></Movies>
@@ -126,11 +130,7 @@ class App extends Component {
                 <h1>Oops No Movies Found !</h1>
               )}
             </Route>
-
-            <Route path="/fav" exact>
-              <Favourite></Favourite>
-            </Route>
-
+            
             <Route path="/moviepage" exact component={MoviePage}></Route>
           </Switch>
         </div>

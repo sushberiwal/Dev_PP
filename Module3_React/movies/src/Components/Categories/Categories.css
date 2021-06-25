@@ -1,0 +1,30 @@
+.movie-rows{
+    margin-top: 20px;
+}
+
+.genre-row{
+    margin-left: 20px;
+}
+
+.genre-row h2{
+    color: white;
+}
+
+.movie-row-list{
+    display: flex;
+    overflow: hidden;
+    padding: 20px;
+    /* justify-content: space-evenly; */
+}
+
+.movie-row-list img{
+    object-fit: contain;
+    width: 100%;
+    height: 250px;
+    margin-right: 10px;
+    transition: transform .5s;
+}
+
+.movie-row-list img:hover{
+    transform: scale(1.1);
+}

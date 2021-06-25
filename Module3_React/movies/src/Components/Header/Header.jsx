@@ -25,24 +25,23 @@ class Header extends Component {
         <div className="logo">
           <img src="logo.svg" alt="" />
         </div>
-        <div className="search-btn">
-          <input
-            className="search-movies"
-            value={this.state.newMovieName}
-            type="text"
-            placeholder="Search"
-            onChange={this.handleOnChange}
-            onKeyPress={this.handleKeyPress}
-          />
-        </div>
-
+          <div className="search-btn">
+            <input
+              className="search-movies"
+              value={this.state.newMovieName}
+              type="text"
+              placeholder="Search"
+              onChange={this.handleOnChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </div>
         <div className="header-links">
           <div className="header-link">
             <Link to="/">Home</Link>
           </div>
 
           <div className="header-link">
-            <Link to="/fav">Favourites</Link>
+            <Link to="/more">More</Link>
           </div>
         </div>
       </div>

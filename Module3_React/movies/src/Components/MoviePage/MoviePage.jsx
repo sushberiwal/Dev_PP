@@ -22,6 +22,7 @@ class MoviePage extends Component {
       }
       return false;
     });
+    // [{}]
     this.setState({
       videoObject: videoObject[0],
     });
