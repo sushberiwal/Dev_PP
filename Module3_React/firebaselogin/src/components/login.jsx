@@ -25,9 +25,8 @@ const Login = () => {
   };
 
   const handleLogout = async () => {
-    firebaseAuth.signOut().then(() => {
-      setUser(null);
-    });
+    await firebaseAuth.signOut();
+    setUser(null);
   };
 
   // componentDidMount and componentDidUpdate
