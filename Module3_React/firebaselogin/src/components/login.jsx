@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebaseAuth from "../config/firebase";
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
