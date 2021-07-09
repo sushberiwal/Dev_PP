@@ -4,6 +4,7 @@ import Settings from "./Settings";
 
 export const ThemeContext = React.createContext(); // context create ho gaya
 
+
 export function App() {
   const [lightTheme, setTheme] = useState(true);
 
