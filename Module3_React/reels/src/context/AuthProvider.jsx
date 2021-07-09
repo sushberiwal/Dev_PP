@@ -33,7 +33,5 @@ export function AuthProvider({ children }) {
     login: login,
     signUp: signUp,
   };
-  return <AuthContext.Provider value={value}>
-           {children}
-      </AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

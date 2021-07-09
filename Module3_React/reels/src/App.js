@@ -13,9 +13,10 @@ import Signup from "./Components/Signup";
 import { AuthContext, AuthProvider } from "./context/AuthProvider";
 
 function App() {
+
   return (
     <AuthProvider>
-      <Router>
+       <Router>
         <div className="App">
           <Header></Header>
           <Switch>
@@ -34,7 +35,7 @@ function PrivateRoute(props) {
   let { comp: Component, path } = props;
   // Feeds ?? loggedIn and path="/"
   let { currentUser } = useContext(AuthContext);
-  let currentUser = false;
+  // let currentUser = false;
   return currentUser ? (
     <Route path={path} component={Component}></Route>
   ) : (
