@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import IntersectionDemo from './IntersectionObserver/IntersectionDemo';
 import Buttons from './MaterialUI/Buttons';
+import Grids from "./MaterialUI/Grids";
+import { Grid } from '@material-ui/core';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
+    <App />
     {/* <IntersectionDemo></IntersectionDemo> */}
-    <Buttons></Buttons>
+    {/* <Buttons></Buttons> */}
+    {/* <Grids></Grids> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
