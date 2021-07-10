@@ -35,7 +35,7 @@ function PrivateRoute(props) {
   let { comp: Component, path } = props;
   // Feeds ?? loggedIn and path="/"
   let { currentUser } = useContext(AuthContext);
-  // let currentUser = false;
+  // let currentUser = true;
   return currentUser ? (
     <Route path={path} component={Component}></Route>
   ) : (

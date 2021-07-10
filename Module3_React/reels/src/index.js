@@ -6,8 +6,8 @@ import IntersectionDemo from './IntersectionObserver/IntersectionDemo';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <IntersectionDemo></IntersectionDemo>
+    <App />
+    {/* <IntersectionDemo></IntersectionDemo> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

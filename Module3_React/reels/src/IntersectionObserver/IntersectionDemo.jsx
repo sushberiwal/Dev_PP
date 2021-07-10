@@ -57,7 +57,7 @@ const IntersectionDemo = () => {
 
 function Video(props) {
   return (
-    <video className="video-styles" controls muted={true} id={props.id}>
+    <video className="video-styles" muted={true} id={props.id} loop={true}>
       <source src={props.src} type="video/mp4"></source>
     </video>
   );
