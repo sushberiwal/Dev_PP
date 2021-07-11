@@ -65,7 +65,7 @@ const Login = (props) => {
   return (
     <div>
       <Container>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{justifyContent:"space-around"}}>
           {/* Carousel */}
           <Grid item sm={5}>
             <Paper className={classes.carousal}>Carousel</Paper>
@@ -84,6 +84,7 @@ const Login = (props) => {
                   value={email}
                   size="small"
                   onChange={(e) => setEmail(e.target.value)}
+                  className = {classes.mb}
                 ></TextField>
                 <TextField
                   label="Password"
@@ -92,6 +93,7 @@ const Login = (props) => {
                   value={password}
                   size="small"
                   onChange={(e) => setPassword(e.target.value)}
+                  className = {classes.mb}
                 ></TextField>
               </CardContent>
               <CardActions>
