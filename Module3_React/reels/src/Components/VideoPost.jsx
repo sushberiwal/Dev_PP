@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { firebaseDB } from "../config/firebase";
+import { firebaseDB , timeStamp } from "../config/firebase";
 import ReactDOM from "react-dom";
 import {AuthContext} from "../context/AuthProvider";
 import {
@@ -150,7 +150,7 @@ function Video(props) {
       }}
       muted={true}
       onEnded={handleAutoScroll}
-      onClick={(e) => {}}
+      onClick={(e) => { console.log(timeStamp()) }}
     >
       <source src={props.src} type="video/mp4"></source>
     </video>

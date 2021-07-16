@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Button } from "@material-ui/core";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import { firebaseDB, firebaseStorage } from "../config/firebase";
+import { firebaseDB, firebaseStorage, timeStamp } from "../config/firebase";
 import { uuid } from "uuidv4";
 import VideoPost from "./VideoPost";
 const Feeds = (props) => {
   const { signOut } = useContext(AuthContext);
   const [videoFile, setVideoFile] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [uploadVideoError, setUploadVideoError] = useState("");
   const { currentUser } = useContext(AuthContext);
   const handleLogout = async () => {
     try {
@@ -24,6 +25,11 @@ const Feeds = (props) => {
   };
   const handleUploadFile = async () => {
     try {
+      if (videoFile.size / 1000000 > 5) {
+        setUploadVideoError("Selected File Exceeds 5MB cannot upload !");
+        return;
+      }
+
       // upload video in firebase storage
       let uid = currentUser.uid;
       const uploadVideoObject = firebaseStorage
@@ -51,11 +57,13 @@ const Feeds = (props) => {
           comments: [],
           likes: [],
           videoLink: videoUrl,
+          createdAt: timeStamp(),
         });
         let doc = await firebaseDB.collection("users").doc(uid).get();
         let document = doc.data();
         document.postsCreated.push(pid);
         await firebaseDB.collection("users").doc(uid).set(document);
+        setUploadVideoError("");
       }
     } catch (err) {}
   };
@@ -92,24 +100,11 @@ const Feeds = (props) => {
 
   useEffect(() => {
     //GET ALL THE POSTS
-    // get all documents of a collection in firebase
-    //   db.collection('documents')
-    // .get()
-    // .then(querySnapshot => {
-    //   const documents = querySnapshot.docs.map(doc => doc.data())
-    //   // do something with documents
-    // db.collection("cities").where("state", "==", "CA")
-    // .onSnapshot((querySnapshot) => {
-    //     var cities = [];
-    //     querySnapshot.forEach((doc) => {
-    //         cities.push(doc.data().name);
-    //     });
-    //     console.log("Current cities in CA: ", cities.join(", "));
-    // });
 
-
+    //onSnapshot => listens for changes on the collection
     firebaseDB
       .collection("posts")
+      .orderBy("createdAt", "desc")
       .onSnapshot((snapshot) => {
         let allPosts = snapshot.docs.map((doc) => {
           return doc.data();
@@ -120,7 +115,7 @@ const Feeds = (props) => {
 
   return (
     <div>
-      {/* <button onClick={handleLogout}>Logout</button> */}
+      <button onClick={handleLogout}>Logout</button>
       <div className="uploadVideo">
         <div>
           <input type="file" onChange={handleInputFile} />
@@ -135,8 +130,9 @@ const Feeds = (props) => {
             </Button>
           </label>
         </div>
+        <p>{uploadVideoError}</p>
       </div>
-      <div className="feeds-video-list" style={{margin:"auto"}}>
+      <div className="feeds-video-list" style={{ margin: "auto" }}>
         {posts.map((postObj) => {
           return <VideoPost key={postObj.pid} postObj={postObj}></VideoPost>;
         })}
