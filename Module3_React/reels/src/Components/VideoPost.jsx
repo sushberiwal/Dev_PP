@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { firebaseDB , timeStamp } from "../config/firebase";
+import { firebaseDB, timeStamp } from "../config/firebase";
 import ReactDOM from "react-dom";
-import {AuthContext} from "../context/AuthProvider";
+import { AuthContext } from "../context/AuthProvider";
 import {
   Card,
   CardHeader,
@@ -15,12 +15,16 @@ import {
   Avatar,
   Container,
 } from "@material-ui/core";
+import { Favorite, FavoriteBorder } from "@material-ui/icons";
 
 const VideoPost = (props) => {
   let [user, setUser] = useState(null);
   let [comment, setComment] = useState("");
   let [commentList, setCommentList] = useState([]);
-  let {currentUser} = useContext(AuthContext);
+  let [likesCount, setLikesCount] = useState(null);
+  let [isLiked, setIsLiked] = useState(false);
+
+  let { currentUser } = useContext(AuthContext);
   // { comment , profilePhotoUrl }
 
   const useStyles = makeStyles({
@@ -30,31 +34,32 @@ const VideoPost = (props) => {
   });
   let classes = useStyles();
 
-
-  const addCommentToCommentList = async (e)=>{
+  const addCommentToCommentList = async (e) => {
     let profilePic;
     // when commenting user and post author user is same
-    if(currentUser.uid == user.userId){
+    if (currentUser.uid == user.userId) {
       profilePic = user.profileImageUrl;
-    }
-    else{
+    } else {
       let doc = await firebaseDB.collection("users").doc(currentUser.uid).get();
       let user = doc.data();
       profilePic = user.profileImageUrl;
     }
-    let newCommentList = [...commentList , {
-      profilePic: profilePic,
-      comment: comment,
-    }]
+    let newCommentList = [
+      ...commentList,
+      {
+        profilePic: profilePic,
+        comment: comment,
+      },
+    ];
 
     // add comments in firebase
     let postObject = props.postObj;
-    postObject.comments.push({ uid:currentUser.uid , comment: comment });
+    postObject.comments.push({ uid: currentUser.uid, comment: comment });
     // it will set a new post object with updated comments in firebase DB
     await firebaseDB.collection("posts").doc(postObject.pid).set(postObject);
     setCommentList(newCommentList);
     setComment("");
-  }
+  };
 
   useEffect(async () => {
     console.log(props);
@@ -62,6 +67,7 @@ const VideoPost = (props) => {
     let doc = await firebaseDB.collection("users").doc(uid).get();
     let user = doc.data();
     let commentList = props.postObj.comments;
+    let likes = props.postObj.likes;
     // {uid , comment} , {uid , comment} , {uid , comment};
     let updatedCommentList = [];
 
@@ -73,6 +79,15 @@ const VideoPost = (props) => {
         profilePic: commentUserPic,
         comment: commentObj.comment,
       });
+    }
+
+    if (likes.includes(currentUser.uid)) {
+      setIsLiked(true);
+      setLikesCount(likes.length - 1);
+    } else {
+      if(likes.length){
+        setLikesCount(likes.length);
+      }
     }
 
     console.log(updatedCommentList);
@@ -99,8 +114,16 @@ const VideoPost = (props) => {
             src={props.postObj.videoLink}
           ></Video>
         </div>
-        <Typography variant="p">Comments</Typography>
+        <div>
+          {isLiked ? <Favorite style={{color:"red"}}></Favorite> : <FavoriteBorder></FavoriteBorder>}
+        </div>
 
+        {likesCount && (
+          <div>
+            <Typography variant="p">Liked by {likesCount} others </Typography>
+          </div>
+        )}
+        <Typography variant="p">Comments</Typography>
         <TextField
           variant="outlined"
           label="Add a comment"
@@ -133,14 +156,14 @@ const VideoPost = (props) => {
 
 function Video(props) {
   const handleAutoScroll = (e) => {
-  //   console.log(e);
-  //   let next = ReactDOM.findDOMNode(e.target).parentNode.parentNode.parentNode
-  //     .nextSibling;
-  //   console.log(next);
-  //   if (next) {
-  //     next.scrollIntoView({ behaviour: "smooth" });
-  //     e.target.muted = "true";
-  //   }
+    //   console.log(e);
+    //   let next = ReactDOM.findDOMNode(e.target).parentNode.parentNode.parentNode
+    //     .nextSibling;
+    //   console.log(next);
+    //   if (next) {
+    //     next.scrollIntoView({ behaviour: "smooth" });
+    //     e.target.muted = "true";
+    //   }
   };
   return (
     <video
@@ -150,7 +173,9 @@ function Video(props) {
       }}
       muted={true}
       onEnded={handleAutoScroll}
-      onClick={(e) => { console.log(timeStamp()) }}
+      onClick={(e) => {
+        console.log(timeStamp());
+      }}
     >
       <source src={props.src} type="video/mp4"></source>
     </video>
