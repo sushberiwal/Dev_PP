@@ -98,10 +98,19 @@ const Feeds = (props) => {
     // .then(querySnapshot => {
     //   const documents = querySnapshot.docs.map(doc => doc.data())
     //   // do something with documents
+    // db.collection("cities").where("state", "==", "CA")
+    // .onSnapshot((querySnapshot) => {
+    //     var cities = [];
+    //     querySnapshot.forEach((doc) => {
+    //         cities.push(doc.data().name);
+    //     });
+    //     console.log("Current cities in CA: ", cities.join(", "));
+    // });
+
+
     firebaseDB
       .collection("posts")
-      .get()
-      .then((snapshot) => {
+      .onSnapshot((snapshot) => {
         let allPosts = snapshot.docs.map((doc) => {
           return doc.data();
         });
@@ -127,7 +136,7 @@ const Feeds = (props) => {
           </label>
         </div>
       </div>
-      <div className="feeds-video-list">
+      <div className="feeds-video-list" style={{margin:"auto"}}>
         {posts.map((postObj) => {
           return <VideoPost key={postObj.pid} postObj={postObj}></VideoPost>;
         })}
