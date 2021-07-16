@@ -23,7 +23,6 @@ const VideoPost = (props) => {
   let [commentList, setCommentList] = useState([]);
   let [likesCount, setLikesCount] = useState(null);
   let [isLiked, setIsLiked] = useState(false);
-
   let { currentUser } = useContext(AuthContext);
   // { comment , profilePhotoUrl }
 
@@ -61,6 +60,39 @@ const VideoPost = (props) => {
     setComment("");
   };
 
+  const toggleLikeIcon = async () =>{
+    if(isLiked){
+      // post liked hai to unlike the post
+      // make isLiked = false;
+      // in postDoc remove your uid in likes array !
+      // setLikesCount(1 ? null : -1);
+      let postDoc = props.postObj;
+      let filteredLikes = postDoc.likes.filter( uid =>{
+        if(uid == currentUser.uid){
+          return false;
+        }
+        else{
+          return true;
+        }
+      });
+      postDoc.likes = filteredLikes;
+      await firebaseDB.collection("posts").doc(postDoc.pid).set(postDoc);
+      setIsLiked(false);
+      likesCount == 1 ? setLikesCount(null) : setLikesCount(likesCount-1);
+    }
+    else{
+      // post liked nhi hai to like the post
+      // make isLiked = true;
+      // in postDOc add your uid in likes array !
+      // setLikesCount( null ? 1 : +1);
+      let postDoc = props.postObj;
+      postDoc.likes.push(currentUser.uid);
+      await firebaseDB.collection("posts").doc(postDoc.pid).set(postDoc);
+      setIsLiked(true);
+      likesCount == null ? setLikesCount(1) : setLikesCount(likesCount+1);
+    }
+  }
+
   useEffect(async () => {
     console.log(props);
     let uid = props.postObj.uid;
@@ -83,9 +115,9 @@ const VideoPost = (props) => {
 
     if (likes.includes(currentUser.uid)) {
       setIsLiked(true);
-      setLikesCount(likes.length - 1);
+      setLikesCount(likes.length);
     } else {
-      if(likes.length){
+      if (likes.length) {
         setLikesCount(likes.length);
       }
     }
@@ -115,7 +147,14 @@ const VideoPost = (props) => {
           ></Video>
         </div>
         <div>
-          {isLiked ? <Favorite style={{color:"red"}}></Favorite> : <FavoriteBorder></FavoriteBorder>}
+          {isLiked ? (
+            <Favorite
+              onClick={() => toggleLikeIcon()}
+              style={{ color: "red" }}
+            ></Favorite>
+          ) : (
+            <FavoriteBorder onClick={() => toggleLikeIcon()}></FavoriteBorder>
+          )}
         </div>
 
         {likesCount && (
