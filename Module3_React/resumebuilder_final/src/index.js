@@ -25,6 +25,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.firestore()
+
 const reduxStore = createStore(rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})), 
